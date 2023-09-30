@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GWIZD</string>
+    <string name="cameraBtnLabel">Take a photo</string>
+    <string name="photoDescription">Animal photo</string>
 </resources>
