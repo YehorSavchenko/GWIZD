@@ -6,12 +6,12 @@ import com.centarius.gwizd.database.AnimalDao;
 import com.centarius.gwizd.model.AnimalSpotted;
 import com.centarius.gwizd.storage.AnimalImageStorageClient;
 
-import java.io.File;
 import java.util.function.Consumer;
 
 public class AnimalSaveService {
     private final AnimalImageStorageClient animalImageStorageClient;
     private final AnimalDao animalDao;
+    private static AnimalSaveService INSTANCE = new AnimalSaveService();
 
     public AnimalSaveService() {
         this.animalDao = new AnimalDao();
@@ -25,5 +25,9 @@ public class AnimalSaveService {
 
     public void setAnimalListener(Consumer<AnimalSpotted> animalProcessor) {
         this.animalDao.attachListener(animalProcessor);
+    }
+
+    public static AnimalSaveService getInstance() {
+        return INSTANCE;
     }
 }
