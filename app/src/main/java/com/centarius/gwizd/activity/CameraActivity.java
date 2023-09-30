@@ -1,5 +1,6 @@
 package com.centarius.gwizd.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import com.centarius.gwizd.R;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Locale;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -47,7 +51,8 @@ public class CameraActivity extends AppCompatActivity {
         if (photoIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
             try {
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", new Locale("pl", "PL"));
+                String timeStamp = sdf.format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "_";
                 File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
                 photoFile = File.createTempFile(
@@ -64,7 +69,7 @@ public class CameraActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(photoIntent, REQUEST_IMAGE_CAPTURE_CODE);
+                mGetContent.launch(photoIntent);
             }
         }
     }
@@ -92,4 +97,13 @@ public class CameraActivity extends AppCompatActivity {
             photoView.setImageURI(imageUri);
         }
     }
+
+    private final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    // The image is saved in the imageUri, do something with it, for example:
+                    ImageView photoView = findViewById(R.id.photoView);
+                    photoView.setImageURI(imageUri);
+                }
+            });
 }
