@@ -4,13 +4,16 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.centarius.gwizd.model.AnimalSpotted;
 import com.centarius.gwizd.model.Location;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -38,9 +41,9 @@ public class AnimalDao {
     }
 
     public void attachListener(Consumer<AnimalSpotted> processAnimal) {
-        ValueEventListener animalListener = new ValueEventListener() {
+        ChildEventListener animalListener = new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 // Get Post object and use the values to update the UI
                 AnimalSpotted animalSpotted = dataSnapshot.getValue(AnimalSpotted.class);
                 if (animalSpotted != null) {
@@ -50,13 +53,28 @@ public class AnimalDao {
             }
 
             @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
 
         };
-        mDatabase.child(animalsList).addValueEventListener(animalListener);
+        mDatabase.child(animalsList).addChildEventListener(animalListener);
     }
 
     public void tempSetAnimal() {

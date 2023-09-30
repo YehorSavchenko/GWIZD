@@ -29,6 +29,9 @@ public class AnimalSpotted {
         this.timestamp = timestamp;
     }
 
+    public AnimalSpotted() {
+    }
+
     public void setAnimalType(String animalType) {
         this.animalType = animalType;
     }

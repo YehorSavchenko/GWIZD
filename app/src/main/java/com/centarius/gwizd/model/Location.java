@@ -22,6 +22,9 @@ public class Location {
         this.whatever = whatever;
     }
 
+    public Location() {
+    }
+
     @NonNull
     @Override
     public String toString() {
