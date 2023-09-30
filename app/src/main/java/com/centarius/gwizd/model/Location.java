@@ -2,11 +2,6 @@ package com.centarius.gwizd.model;
 
 import androidx.annotation.NonNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 public class Location {
     public Location(String whatever) {
         this.whatever = whatever;
@@ -29,5 +24,20 @@ public class Location {
     @Override
     public String toString() {
         return whatever;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Location location = (Location) o;
+
+        return whatever.equals(location.whatever);
+    }
+
+    @Override
+    public int hashCode() {
+        return whatever.hashCode();
     }
 }

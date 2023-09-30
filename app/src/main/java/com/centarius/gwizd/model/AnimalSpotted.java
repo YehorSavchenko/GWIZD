@@ -2,11 +2,6 @@ package com.centarius.gwizd.model;
 
 import androidx.annotation.NonNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 public class AnimalSpotted {
     private String animalType;
 
@@ -109,6 +104,36 @@ public class AnimalSpotted {
                 ", userId='" + userId + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AnimalSpotted that = (AnimalSpotted) o;
+
+        if (isHurt != that.isHurt) return false;
+        if (!animalType.equals(that.animalType)) return false;
+        if (animalStatus != that.animalStatus) return false;
+        if (!tips.equals(that.tips)) return false;
+        if (!imageName.equals(that.imageName)) return false;
+        if (!location.equals(that.location)) return false;
+        if (!userId.equals(that.userId)) return false;
+        return timestamp.equals(that.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = animalType.hashCode();
+        result = 31 * result + animalStatus.hashCode();
+        result = 31 * result + tips.hashCode();
+        result = 31 * result + (isHurt ? 1 : 0);
+        result = 31 * result + imageName.hashCode();
+        result = 31 * result + location.hashCode();
+        result = 31 * result + userId.hashCode();
+        result = 31 * result + timestamp.hashCode();
+        return result;
     }
 
     public enum AnimalStatus {
