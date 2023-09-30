@@ -2,32 +2,23 @@ package com.centarius.gwizd.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.icu.text.SimpleDateFormat;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.centarius.gwizd.R;
@@ -42,7 +33,6 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,16 +46,21 @@ public class CameraFragment extends Fragment {
     private TextView locationView;
     private Context context;
 
-    private final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    ImageView photoView = getView().findViewById(R.id.photoView);
-                    photoView.setImageURI(imageUri);
-                    getLocation();
-                    recognizeAnimal(imageUri);
-                }
-            });
+    public static CameraFragment newInstance(Uri imageUri) {
+        CameraFragment fragment = new CameraFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("imageUri", imageUri);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            imageUri = getArguments().getParcelable("imageUri");
+        }
+    }
 
     @Nullable
     @Override
@@ -100,55 +95,17 @@ public class CameraFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         context = getContext();
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
-        } else {
-            getPicture();
-        }
+
+        // Set the image URI to ImageView to show the picture
+        ImageView photoView = getView().findViewById(R.id.photoView);
+//        Log.i("MYPHOTO", imageUri.toString());
+        photoView.setImageURI(imageUri);
+
+        // Get the location and recognize the animal
+        getLocation();
+        recognizeAnimal(imageUri);
     }
 
-    private void getPicture() {
-        Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (photoIntent.resolveActivity(context.getPackageManager()) != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", new Locale("pl", "PL"));
-            String timeStamp = sdf.format(new Date());
-            String imageFileName = "JPEG_" + timeStamp + "_";
-
-            ContentValues values = new ContentValues();
-            values.put(MediaStore.Images.Media.TITLE, imageFileName);
-            values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-
-            imageUri = getActivity().getContentResolver().insert(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-            photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-
-            if (imageUri != null) {
-                mGetContent.launch(photoIntent);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getPicture();
-            } else {
-                Toast.makeText(context, "Camera permission is necessary to take a photo.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLocation();
-            } else {
-                Toast.makeText(context, "Location permission is necessary", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     private void getLocation() {

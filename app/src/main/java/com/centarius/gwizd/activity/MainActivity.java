@@ -1,10 +1,20 @@
 package com.centarius.gwizd.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.centarius.gwizd.R;
@@ -21,25 +31,89 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Stack<Integer> fragmentStack = new Stack<>();
 
+    private Uri imageUri;
+
+    private final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    openCameraFragment();
+                } else {
+                    if (imageUri != null) {
+                        getContentResolver().delete(imageUri, null, null);
+                        imageUri = null;
+                    }
+                }
+            });
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    callCamera();
+                } else {
+                    // Handle the case where permission is not granted
+                }
+            });
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+        fragmentStack.push(R.id.action_camera);  // Add the default fragment ID to the stack
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         openCameraButton = findViewById(R.id.openCameraBtn);
 
         openCameraButton.setOnClickListener(view -> {
-            // Open CameraFragment
-            Fragment cameraFragment = new CameraFragment();  // Create an instance of your CameraFragment
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, cameraFragment, "CameraFragment") // Replace any existing fragment with the new one
-                    .addToBackStack(null) // Add this transaction to the back stack
-                    .commit();
+            callCamera();
         });
 
         setBottomNavigationView();
+    }
+
+    private Uri createImageUri() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera");
+        return getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+
+
+    private void callCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            // Permission is already granted
+            startCamera();
+        } else {
+            // Request the camera permission
+            requestPermissionLauncher.launch(Manifest.permission.CAMERA);
+        }
+    }
+
+    private void startCamera() {
+        Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (photoIntent.resolveActivity(getPackageManager()) != null) {
+            // Create a Uri where the camera app should save the photo
+            imageUri = createImageUri();
+            if (imageUri != null) {
+                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                mGetContent.launch(photoIntent);
+            }
+        }
+    }
+
+
+
+
+    private void openCameraFragment() {
+        // Open CameraFragment
+        CameraFragment cameraFragment = CameraFragment.newInstance(imageUri);  // Create an instance of your CameraFragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, cameraFragment, "CameraFragment") // Replace any existing fragment with the new one
+                .addToBackStack(null) // Add this transaction to the back stack
+                .commit();
     }
 
     public void hideBottomNavigation() {
@@ -55,7 +129,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_camera);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            fragmentStack.push(id);
+            if (fragmentStack.isEmpty() || id != fragmentStack.peek()) {
+                fragmentStack.push(id);
+            }
             Fragment selectedFragment = null;
             String tag = null;
 
