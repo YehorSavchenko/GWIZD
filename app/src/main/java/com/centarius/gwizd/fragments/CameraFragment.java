@@ -163,11 +163,7 @@ public class CameraFragment extends Fragment {
                         List<Address> addresses = geocoder.getFromLocation(
                                 location.getLatitude(), location.getLongitude(), 1);
                         if (addresses != null && addresses.size() > 0) {
-                            locationView.setText("Latitude: " + addresses.get(0).getLatitude() +
-                                    "Longitude: " + addresses.get(0).getLongitude() +
-                                    "Address: " + addresses.get(0).getAddressLine(0) +
-                                    "City: " + addresses.get(0).getLocality() +
-                                    "Country: " + addresses.get(0).getCountryName());
+                            locationView.setText(addresses.get(0).getAddressLine(0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -233,14 +229,6 @@ public class CameraFragment extends Fragment {
 
             TextView animalType = getView().findViewById(R.id.animalTypeView);
             animalType.setText(classes[maxPos]);
-
-//            Part to show percents of confidence
-//
-//            StringBuilder s = new StringBuilder();
-//            for(int i = 0; i < classes.length; i++){
-//                s.append(String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100));
-//            }
-//            confidence.setText(s.toString());
 
             // Releases model resources if no longer used.
             model.close();
