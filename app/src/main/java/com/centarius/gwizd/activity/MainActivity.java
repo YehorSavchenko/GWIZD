@@ -1,11 +1,10 @@
-package com.centarius.gwizd;
+package com.centarius.gwizd.activity;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import java.util.logging.Logger;
+import com.centarius.gwizd.R;
 
 public class MainActivity extends AppCompatActivity {
 
