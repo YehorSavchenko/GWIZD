@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
-        new AnimalDao().saveAnimalInDb(new AnimalSpotted("a", true, "asddsa", new Location("sdas"), "dsasa"));
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
