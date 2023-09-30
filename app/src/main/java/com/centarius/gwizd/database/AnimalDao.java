@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.centarius.gwizd.model.AnimalSpotted;
 import com.centarius.gwizd.model.Location;
+import com.centarius.gwizd.model.UploadException;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,19 +29,20 @@ public class AnimalDao {
                 .getReference();
     }
 
-    public void saveAnimalInDb(AnimalSpotted animalSpotted) {
+    public void saveAnimalInDb(AnimalSpotted animalSpotted) throws UploadException {
         String key = mDatabase.child("users")
                                 .push()
                                 .getKey();
         if (key == null) {
-            throw new RuntimeException("Key is null");
+            throw new UploadException("Key is null");
         }
         mDatabase.child(animalsList)
                 .child(key)
                 .setValue(animalSpotted);
     }
 
-    public void attachListener(Consumer<AnimalSpotted> processAnimal) {
+    public void attachListener(Consumer<AnimalSpotted> processAnimalAdded,
+                               Consumer<AnimalSpotted> processAnimalDeleted) {
         ChildEventListener animalListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
@@ -48,7 +50,7 @@ public class AnimalDao {
                 AnimalSpotted animalSpotted = dataSnapshot.getValue(AnimalSpotted.class);
                 if (animalSpotted != null) {
                     Log.w(TAG, animalSpotted.toString());
-                    processAnimal.accept(animalSpotted);
+                    processAnimalAdded.accept(animalSpotted);
                 }
             }
 
@@ -59,7 +61,11 @@ public class AnimalDao {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                AnimalSpotted animalSpotted = snapshot.getValue(AnimalSpotted.class);
+                if (animalSpotted != null) {
+                    Log.w(TAG, animalSpotted.toString());
+                    processAnimalDeleted.accept(animalSpotted);
+                }
             }
 
             @Override
@@ -77,7 +83,7 @@ public class AnimalDao {
         mDatabase.child(animalsList).addChildEventListener(animalListener);
     }
 
-    public void tempSetAnimal() {
+    public void tempSetAnimal() throws UploadException {
         this.saveAnimalInDb(new AnimalSpotted("Ja po siedzeniu do późna",
                 AnimalSpotted.AnimalStatus.ANIMAL_DEAD,
                 "a",

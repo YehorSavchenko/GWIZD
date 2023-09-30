@@ -7,9 +7,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.centarius.gwizd.R;
-import com.centarius.gwizd.database.AnimalDao;
-import com.centarius.gwizd.model.AnimalSpotted;
-import com.centarius.gwizd.model.Location;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
