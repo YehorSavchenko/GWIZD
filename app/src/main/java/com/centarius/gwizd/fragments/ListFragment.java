@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.centarius.gwizd.R;
 import com.centarius.gwizd.model.AnimalSpotted;
-import com.centarius.gwizd.model.Location;
 import com.centarius.gwizd.utils.AnimalSaveService;
 import com.centarius.gwizd.view.ListAdapter;
 
@@ -58,7 +57,10 @@ public class ListFragment extends Fragment {
             if (!animalSpottedList.contains(it)) {
                 animalSpottedList.add(it);
                 adapter.notifyDataSetChanged();
-            }}, animalSpottedList::remove);
+            }},
+                it -> {
+            animalSpottedList.remove(it);
+            adapter.notifyDataSetChanged();});
 
         // Set the adapter
         recyclerView.setAdapter(adapter);
