@@ -91,6 +91,20 @@ public class AnimalSpotted {
         return timestamp;
     }
 
+    @Override
+    public String toString() {
+        return "AnimalSpotted{" +
+                "animalType='" + animalType + '\'' +
+                ", animalStatus=" + animalStatus +
+                ", tips='" + tips + '\'' +
+                ", isHurt=" + isHurt +
+                ", imageName='" + imageName + '\'' +
+                ", location=" + location +
+                ", userId='" + userId + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                '}';
+    }
+
     public enum AnimalStatus {
         ANIMAL_WILD,
         ANIMAL_DEAD,

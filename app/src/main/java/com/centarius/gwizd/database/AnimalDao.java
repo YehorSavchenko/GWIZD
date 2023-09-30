@@ -43,6 +43,7 @@ public class AnimalDao {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                 AnimalSpotted animalSpotted = dataSnapshot.getValue(AnimalSpotted.class);
+                Log.w(TAG, animalSpotted.toString());
                 processAnimal.accept(animalSpotted);
             }
 
