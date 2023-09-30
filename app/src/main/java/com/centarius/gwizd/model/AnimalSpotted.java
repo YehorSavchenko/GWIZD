@@ -10,12 +10,11 @@ import lombok.Setter;
 public class AnimalSpotted {
     private String animalType;
     private AnimalStatus animalStatus;
-    private String tips;  // Tips on what to do
-    private boolean isHurt;  // Is the animal hurt?
-    private String imageName;  // URL to the image of the animal
-    private Location location;  // Location where the animal was spotted
-    private String userId;  // User who reported it
-
+    private String tips;
+    private boolean isHurt;
+    private String imageName;
+    private Location location;
+    private String userId;
     private String timestamp;
 
     public AnimalSpotted(String animalType, AnimalStatus animalStatus, String tips, boolean isHurt, String imageName, Location location, String userId, String timestamp) {
