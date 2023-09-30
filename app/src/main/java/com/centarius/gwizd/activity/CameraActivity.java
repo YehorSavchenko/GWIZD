@@ -1,6 +1,7 @@
 package com.centarius.gwizd.activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
@@ -50,25 +51,24 @@ public class CameraActivity extends AppCompatActivity {
         Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (photoIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", new Locale("pl", "PL"));
-                String timeStamp = sdf.format(new Date());
-                String imageFileName = "JPEG_" + timeStamp + "_";
-                File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                photoFile = File.createTempFile(
-                        imageFileName,  /* prefix */
-                        ".jpg",         /* suffix */
-                        storageDir      /* directory */
-                );
-                // Save a file: path for use with ACTION_VIEW intents
-                imageUri = FileProvider.getUriForFile(this, "com.centarius.gwizd.fileprovider", photoFile);
-            } catch (IOException ex) {
-                Log.e("CameraError", "Error occurred while creating the File", ex);
-            }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", new Locale("pl", "PL"));
+            String timeStamp = sdf.format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
 
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            // Create an image file name
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.TITLE, imageFileName);
+            values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+
+            //Create the Uri to save the image
+            imageUri = getContentResolver().insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+            // Add the Uri to the intent
+            photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+            // Continue only if the Uri was successfully created
+            if (imageUri != null) {
                 mGetContent.launch(photoIntent);
             }
         }
