@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.action_list) {
-                // Handle Home click
+                Intent listIntent = new Intent(MainActivity.this, ListActivity.class);
+                startActivity(listIntent);
+                return true;
             } else if (id == R.id.action_camera) {
                 // Handle Search click
             } else if (id == R.id.action_profile) {
