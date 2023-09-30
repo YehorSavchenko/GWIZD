@@ -4,4 +4,6 @@
     <string name="photoDescription">Animal photo</string>
     <string name="locationLabel">Location</string>
     <string name="animal_type_label">Animal spotted</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

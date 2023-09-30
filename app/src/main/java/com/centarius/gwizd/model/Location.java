@@ -12,9 +12,10 @@ public class Location {
         this.whatever = whatever;
     }
 
+    private String whatever;
+
     public Location() {
     }
-    private String whatever;
 
     public String getWhatever() {
         return whatever;
