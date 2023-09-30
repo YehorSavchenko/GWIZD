@@ -16,12 +16,12 @@ public class AnimalSpotted {
 
     private String timestamp;
 
-    public AnimalSpotted(String animalType, AnimalStatus animalStatus, String tips, boolean isHurt, String imageUrl, Location location, String userId, String timestamp) {
+    public AnimalSpotted(String animalType, AnimalStatus animalStatus, String tips, boolean isHurt, String imageName, Location location, String userId, String timestamp) {
         this.animalType = animalType;
         this.animalStatus = animalStatus;
         this.tips = tips;
         this.isHurt = isHurt;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
         this.location = location;
         this.userId = userId;
         this.timestamp = timestamp;
@@ -43,8 +43,8 @@ public class AnimalSpotted {
         isHurt = hurt;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public void setLocation(Location location) {
@@ -75,8 +75,8 @@ public class AnimalSpotted {
         return isHurt;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageName() {
+        return imageName;
     }
 
     public Location getLocation() {
