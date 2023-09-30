@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class AnimalSpotted {
     private String animalType;
+    private AnimalStatus animalStatus;
     private String tips;  // Tips on what to do
     private boolean isHurt;  // Is the animal hurt?
     private String imageUrl;  // URL to the image of the animal
@@ -18,4 +19,10 @@ public class AnimalSpotted {
     private String userId;  // User who reported it
 
     private String timestamp;
+
+    public enum AnimalStatus {
+        ANIMAL_ALIVE,
+        ANIMAL_DEAD,
+        ANIMAL_OWNED
+    }
 }

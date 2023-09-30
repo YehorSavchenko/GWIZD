@@ -30,6 +30,7 @@ public class AnimalDao {
 
     public void tempSetAnimal() {
         this.saveAnimalInDb(new AnimalSpotted("Koteł",
+                AnimalSpotted.AnimalStatus.ANIMAL_ALIVE,
                 "a",
                 true,
                 "asddsa",
