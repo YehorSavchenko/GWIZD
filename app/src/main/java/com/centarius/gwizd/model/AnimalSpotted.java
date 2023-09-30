@@ -21,7 +21,7 @@ public class AnimalSpotted {
     private String timestamp;
 
     public enum AnimalStatus {
-        ANIMAL_ALIVE,
+        ANIMAL_WILD,
         ANIMAL_DEAD,
         ANIMAL_OWNED
     }
