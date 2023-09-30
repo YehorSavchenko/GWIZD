@@ -24,7 +24,7 @@ import java.util.List;
 public class ListFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private AnimalSaveService animalSaveService = AnimalSaveService.getInstance();
+    private final AnimalSaveService animalSaveService = AnimalSaveService.getInstance();
 
     public ListFragment() {
         // Required empty public constructor
