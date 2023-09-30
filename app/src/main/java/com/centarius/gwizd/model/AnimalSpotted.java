@@ -5,10 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class AnimalSpotted {
     private String animalType;
     private AnimalStatus animalStatus;
@@ -19,6 +15,81 @@ public class AnimalSpotted {
     private String userId;  // User who reported it
 
     private String timestamp;
+
+    public AnimalSpotted(String animalType, AnimalStatus animalStatus, String tips, boolean isHurt, String imageUrl, Location location, String userId, String timestamp) {
+        this.animalType = animalType;
+        this.animalStatus = animalStatus;
+        this.tips = tips;
+        this.isHurt = isHurt;
+        this.imageUrl = imageUrl;
+        this.location = location;
+        this.userId = userId;
+        this.timestamp = timestamp;
+    }
+
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
+    }
+
+    public void setAnimalStatus(AnimalStatus animalStatus) {
+        this.animalStatus = animalStatus;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
+    public void setHurt(boolean hurt) {
+        isHurt = hurt;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public AnimalStatus getAnimalStatus() {
+        return animalStatus;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public boolean isHurt() {
+        return isHurt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
 
     public enum AnimalStatus {
         ANIMAL_WILD,
