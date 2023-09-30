@@ -9,6 +9,10 @@ import lombok.Setter;
 
 public class AnimalSpotted {
     private String animalType;
+
+    public AnimalSpotted() {
+    }
+
     private AnimalStatus animalStatus;
     private String tips;
     private boolean isHurt;
@@ -26,9 +30,6 @@ public class AnimalSpotted {
         this.location = location;
         this.userId = userId;
         this.timestamp = timestamp;
-    }
-
-    public AnimalSpotted() {
     }
 
     public void setAnimalType(String animalType) {
