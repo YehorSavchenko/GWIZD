@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class Location {
+    public Location(String whatever) {
+        this.whatever = whatever;
+    }
+
+    public Location() {
+    }
     private String whatever;
 
     public String getWhatever() {
@@ -16,13 +22,6 @@ public class Location {
 
     public void setWhatever(String whatever) {
         this.whatever = whatever;
-    }
-
-    public Location(String whatever) {
-        this.whatever = whatever;
-    }
-
-    public Location() {
     }
 
     @NonNull
