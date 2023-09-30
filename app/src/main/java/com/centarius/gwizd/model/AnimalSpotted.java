@@ -1,5 +1,7 @@
 package com.centarius.gwizd.model;
 
+import androidx.annotation.NonNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -91,6 +93,7 @@ public class AnimalSpotted {
         return timestamp;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "AnimalSpotted{" +
