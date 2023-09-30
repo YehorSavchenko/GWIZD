@@ -1,6 +1,9 @@
 package com.centarius.gwizd.utils;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.net.Uri;
+import android.util.Log;
 
 import com.centarius.gwizd.database.AnimalDao;
 import com.centarius.gwizd.model.AnimalSpotted;
@@ -21,7 +24,9 @@ public class AnimalSaveService {
 
     public void saveAnimal(AnimalSpotted animalSpotted, Uri animalImage) throws UploadException {
         try {
+            Log.d(TAG, "Sending animal to DB");
             animalDao.saveAnimalInDb(animalSpotted);
+            Log.d(TAG, "Saving image to storage");
             animalImageStorageClient.uploadImage(animalImage, animalSpotted.getImageName());
         } catch (Exception e) {
             throw new UploadException("Exception encountered when saving data on remote", e);
