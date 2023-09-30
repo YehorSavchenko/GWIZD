@@ -10,9 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AnimalSpotted {
+    private String animalType;
     private String tips;  // Tips on what to do
     private boolean isHurt;  // Is the animal hurt?
     private String imageUrl;  // URL to the image of the animal
     private Location location;  // Location where the animal was spotted
     private String userId;  // User who reported it
+
+    private String timestamp;
 }

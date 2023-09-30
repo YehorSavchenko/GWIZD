@@ -1,9 +1,9 @@
 {
   "project_info": {
     "project_number": "143579592079",
+    "firebase_url": "https://gwizd-centaris-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "gwizd-centaris",
-    "storage_bucket": "gwizd-centaris.appspot.com",
-    "firebase_url": "https://gwizd-centaris-default-rtdb.europe-west1.firebasedatabase.app"
+    "storage_bucket": "gwizd-centaris.appspot.com"
   },
   "client": [
     {

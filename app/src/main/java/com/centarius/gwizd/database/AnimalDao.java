@@ -5,8 +5,11 @@ import com.centarius.gwizd.model.Location;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+
 public class AnimalDao {
-    private DatabaseReference mDatabase;
+    private final DatabaseReference mDatabase;
 
     public AnimalDao() {
         mDatabase = FirebaseDatabase.getInstance()
@@ -17,12 +20,21 @@ public class AnimalDao {
         String key = mDatabase.child("users")
                                 .push()
                                 .getKey();
+        if (key == null) {
+            throw new RuntimeException("Key is null");
+        }
         mDatabase.child("users")
                 .child(key)
                 .setValue(animalSpotted);
     }
 
     public void tempSetAnimal() {
-        this.saveAnimalInDb(new AnimalSpotted("a", true, "asddsa", new Location("sdas"), "dsasa"));
+        this.saveAnimalInDb(new AnimalSpotted("Koteł",
+                "a",
+                true,
+                "asddsa",
+                new Location("sdas"),
+                "dsasa",
+                Timestamp.from(Instant.now()).toString()));
     }
 }
