@@ -57,12 +57,12 @@ public class AnimalDao {
     }
 
     public void tempSetAnimal() {
-        this.saveAnimalInDb(new AnimalSpotted("Koteł",
-                AnimalSpotted.AnimalStatus.ANIMAL_WILD,
+        this.saveAnimalInDb(new AnimalSpotted("Ja po siedzeniu do późna",
+                AnimalSpotted.AnimalStatus.ANIMAL_DEAD,
                 "a",
                 true,
                 "asddsa",
-                new Location("sdas"),
+                new Location("Na HackYeah"),
                 "dsasa",
                 Timestamp.from(Instant.now()).toString()));
     }

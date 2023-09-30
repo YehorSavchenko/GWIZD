@@ -7,6 +7,7 @@ import com.centarius.gwizd.model.AnimalSpotted;
 import com.centarius.gwizd.storage.AnimalImageStorageClient;
 
 import java.io.File;
+import java.util.function.Consumer;
 
 public class AnimalSaveService {
     private final AnimalImageStorageClient animalImageStorageClient;
@@ -20,5 +21,9 @@ public class AnimalSaveService {
     public void saveAnimal(AnimalSpotted animalSpotted, Uri animalImage) {
         animalDao.saveAnimalInDb(animalSpotted);
         animalImageStorageClient.uploadImage(animalImage, animalSpotted.getImageName());
+    }
+
+    public void setAnimalListener(Consumer<AnimalSpotted> animalProcessor) {
+        this.animalDao.attachListener(animalProcessor);
     }
 }
