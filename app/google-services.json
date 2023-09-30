@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "143579592079",
+    "project_id": "gwizd-centaris",
+    "storage_bucket": "gwizd-centaris.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143579592079:android:437dcc415c174700c0c7fa",
+        "android_client_info": {
+          "package_name": "com.centarius.gwizd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC4TuQ1Ien6jcv4uGC0YaLEB2E9EJAw28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
