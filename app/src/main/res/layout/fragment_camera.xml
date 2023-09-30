@@ -9,35 +9,35 @@
         android:id="@+id/photoView"
         android:layout_width="256dp"
         android:layout_height="256dp"
+        android:contentDescription="@string/photoDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/photoDescription" />
+        app:layout_constraintVertical_bias="0.08"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/locationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/locationLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoView" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/location"
+        app:layout_constraintStart_toEndOf="@+id/locationLabel"
+        app:layout_constraintTop_toBottomOf="@+id/animalTypeView" />
 
     <TextView
         android:id="@+id/animalTypeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:text="@string/animal_type_label"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationView" />
-    <!-- ... existing code ... -->
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/animalType"
+        app:layout_constraintStart_toEndOf="@+id/animalTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/photoView" />
 
-    <!-- Add this ImageButton to serve as the close button -->
     <ImageButton
         android:id="@+id/closeButton"
         android:layout_width="wrap_content"
@@ -48,7 +48,112 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ... existing code ... -->
+    <TextView
+        android:id="@+id/descriptionViewLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/descriptionLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationView" />
 
+    <TextView
+        android:id="@+id/phoneViewLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/phoneLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionViewLabel" />
+
+    <TextView
+        android:id="@+id/animalTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/animalTypeLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photoView" />
+
+    <TextView
+        android:id="@+id/locationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/locationLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animalTypeLabel" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/descriptionValue"
+        app:layout_constraintStart_toEndOf="@+id/descriptionViewLabel"
+        app:layout_constraintTop_toBottomOf="@+id/locationView" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/phoneValue"
+        app:layout_constraintStart_toEndOf="@+id/phoneViewLabel"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <RadioGroup
+        android:id="@+id/animalStatusRg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneViewLabel">
+
+        <RadioButton
+            android:id="@+id/domesticRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/domesticLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/wildRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/wildLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/deadRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/deadLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="153dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/submitText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animalStatusRg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
