@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        new AnimalDao().tempSetAnimal();
 
         openCameraButton = findViewById(R.id.openCameraBtn);
 
