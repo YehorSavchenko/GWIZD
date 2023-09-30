@@ -14,7 +14,7 @@ public class AnimalSpotted {
     private AnimalStatus animalStatus;
     private String tips;  // Tips on what to do
     private boolean isHurt;  // Is the animal hurt?
-    private String imageUrl;  // URL to the image of the animal
+    private String imageName;  // URL to the image of the animal
     private Location location;  // Location where the animal was spotted
     private String userId;  // User who reported it
 

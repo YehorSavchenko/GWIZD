@@ -19,6 +19,6 @@ public class AnimalSaveService {
 
     public void saveAnimal(AnimalSpotted animalSpotted, Uri animalImage) {
         animalDao.saveAnimalInDb(animalSpotted);
-        animalImageStorageClient.uploadImage(animalImage, animalSpotted.getUserId());
+        animalImageStorageClient.uploadImage(animalImage, animalSpotted.getImageName());
     }
 }

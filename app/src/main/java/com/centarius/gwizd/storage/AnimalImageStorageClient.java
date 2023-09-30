@@ -17,9 +17,9 @@ public class AnimalImageStorageClient {
         this.storage = FirebaseStorage.getInstance().getReference();
     }
 
-    public void uploadImage(Uri imageUri, String userId) {
+    public void uploadImage(Uri imageUri, String imageName) {
         StorageReference imageRef = storage.child(imagesPath +
-                userId + Timestamp.from(Instant.now()).toString());
+                imageName);
         imageRef.putFile(imageUri);
     }
 }
