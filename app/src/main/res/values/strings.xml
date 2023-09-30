@@ -3,15 +3,16 @@
     <string name="cameraBtnLabel">Take a photo</string>
     <string name="photoDescription">Animal photo</string>
 
-    <string name="location">Location</string>
-    <string name="animalType">Animal</string>
-
-    <string name="descriptionLabel">Description: </string>
-    <string name="phoneLabel">Phone: </string>
     <string name="animalTypeLabel">Animal type:</string>
     <string name="locationLabel">Location:</string>
-    <string name="descriptionValue">Description</string>
+    <string name="descriptionLabel">Description: </string>
+    <string name="phoneLabel">Phone: </string>
+
+    <string name="animalType">Animal</string>
+    <string name="location">Location</string>
+    <string name="descriptionValue">Medium size animal</string>
     <string name="phoneValue">+48 576 345 002</string>
+
     <string name="domesticLabel">Domestic</string>
     <string name="wildLabel">Wild</string>
     <string name="deadLabel">Dead</string>
