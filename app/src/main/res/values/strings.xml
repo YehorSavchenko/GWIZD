@@ -2,4 +2,5 @@
     <string name="app_name">GWIZD</string>
     <string name="cameraBtnLabel">Take a photo</string>
     <string name="photoDescription">Animal photo</string>
+    <string name="locationLabel">Location:</string>
 </resources>
