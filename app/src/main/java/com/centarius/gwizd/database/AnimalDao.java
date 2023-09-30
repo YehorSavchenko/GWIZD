@@ -87,7 +87,6 @@ public class AnimalDao {
     public void tempSetAnimal() throws UploadException {
         this.saveAnimalInDb(new AnimalSpotted("Ja po siedzeniu do późna",
                 AnimalSpotted.AnimalStatus.ANIMAL_DEAD,
-                "a",
                 true,
                 "asddsa",
                 new Location("Na HackYeah"),

@@ -9,17 +9,15 @@ public class AnimalSpotted {
     }
 
     private AnimalStatus animalStatus;
-    private String tips;
     private boolean isHurt;
     private String imageName;
     private Location location;
     private String userId;
     private String timestamp;
 
-    public AnimalSpotted(String animalType, AnimalStatus animalStatus, String tips, boolean isHurt, String imageName, Location location, String userId, String timestamp) {
+    public AnimalSpotted(String animalType, AnimalStatus animalStatus, boolean isHurt, String imageName, Location location, String userId, String timestamp) {
         this.animalType = animalType;
         this.animalStatus = animalStatus;
-        this.tips = tips;
         this.isHurt = isHurt;
         this.imageName = imageName;
         this.location = location;
@@ -33,10 +31,6 @@ public class AnimalSpotted {
 
     public void setAnimalStatus(AnimalStatus animalStatus) {
         this.animalStatus = animalStatus;
-    }
-
-    public void setTips(String tips) {
-        this.tips = tips;
     }
 
     public void setHurt(boolean hurt) {
@@ -67,10 +61,6 @@ public class AnimalSpotted {
         return animalStatus;
     }
 
-    public String getTips() {
-        return tips;
-    }
-
     public boolean isHurt() {
         return isHurt;
     }
@@ -97,7 +87,6 @@ public class AnimalSpotted {
         return "AnimalSpotted{" +
                 "animalType='" + animalType + '\'' +
                 ", animalStatus=" + animalStatus +
-                ", tips='" + tips + '\'' +
                 ", isHurt=" + isHurt +
                 ", imageName='" + imageName + '\'' +
                 ", location=" + location +
@@ -116,7 +105,6 @@ public class AnimalSpotted {
         if (isHurt != that.isHurt) return false;
         if (!animalType.equals(that.animalType)) return false;
         if (animalStatus != that.animalStatus) return false;
-        if (!tips.equals(that.tips)) return false;
         if (!imageName.equals(that.imageName)) return false;
         if (!location.equals(that.location)) return false;
         if (!userId.equals(that.userId)) return false;
@@ -127,7 +115,6 @@ public class AnimalSpotted {
     public int hashCode() {
         int result = animalType.hashCode();
         result = 31 * result + animalStatus.hashCode();
-        result = 31 * result + tips.hashCode();
         result = 31 * result + (isHurt ? 1 : 0);
         result = 31 * result + imageName.hashCode();
         result = 31 * result + location.hashCode();
