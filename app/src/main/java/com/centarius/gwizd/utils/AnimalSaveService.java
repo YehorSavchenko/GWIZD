@@ -1,5 +1,7 @@
 package com.centarius.gwizd.utils;
 
+import android.net.Uri;
+
 import com.centarius.gwizd.database.AnimalDao;
 import com.centarius.gwizd.model.AnimalSpotted;
 import com.centarius.gwizd.storage.AnimalImageStorageClient;
@@ -15,8 +17,8 @@ public class AnimalSaveService {
         this.animalImageStorageClient = new AnimalImageStorageClient();
     }
 
-    public void saveAnimal(AnimalSpotted animalSpotted, File animalImage) {
+    public void saveAnimal(AnimalSpotted animalSpotted, Uri animalImage) {
         animalDao.saveAnimalInDb(animalSpotted);
-        animalImageStorageClient.uploadImage(animalImage);
+        animalImageStorageClient.uploadImage(animalImage, animalSpotted.getUserId());
     }
 }

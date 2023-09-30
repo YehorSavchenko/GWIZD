@@ -6,6 +6,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 public class AnimalImageStorageClient {
     private final StorageReference storage;
@@ -15,9 +17,9 @@ public class AnimalImageStorageClient {
         this.storage = FirebaseStorage.getInstance().getReference();
     }
 
-    public void uploadImage(File imageFile) {
+    public void uploadImage(Uri imageUri, String userId) {
         StorageReference imageRef = storage.child(imagesPath +
-                imageFile.getName());
-        imageRef.putFile(Uri.fromFile(imageFile));
+                userId + Timestamp.from(Instant.now()).toString());
+        imageRef.putFile(imageUri);
     }
 }
