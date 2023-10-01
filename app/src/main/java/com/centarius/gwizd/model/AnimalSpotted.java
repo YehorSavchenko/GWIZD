@@ -127,6 +127,7 @@ public class AnimalSpotted {
     public enum AnimalStatus {
         ANIMAL_WILD,
         ANIMAL_DEAD,
-        ANIMAL_OWNED
+        ANIMAL_OWNED,
+        NO_STATUS
     }
 }

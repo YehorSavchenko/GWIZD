@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -123,11 +124,23 @@ public class CameraFragment extends Fragment {
         String animalType = recognizeAnimal(imageUri);
 
         Button submitBtn = getView().findViewById(R.id.submitBtn);
+        RadioGroup animalStatus = getView().findViewById(R.id.animalStatusRg);
+        AnimalSpotted.AnimalStatus status = AnimalSpotted.AnimalStatus.NO_STATUS;
+
+        int id = animalStatus.getCheckedRadioButtonId();
+        if (id == R.id.domesticRb) {
+            status = AnimalSpotted.AnimalStatus.ANIMAL_OWNED;
+        } else if (id == R.id.wildRb) {
+            status = AnimalSpotted.AnimalStatus.ANIMAL_WILD;
+        } else if (id == R.id.deadRb) {
+            status = AnimalSpotted.AnimalStatus.ANIMAL_DEAD;
+        }
+        AnimalSpotted.AnimalStatus finalStatus = status;
 
         submitBtn.setOnClickListener(view1 -> {
-            AnimalSpotted animalSpotted = new AnimalSpotted(animalType,
-                    AnimalSpotted.AnimalStatus.ANIMAL_WILD,
-                    false, "userId" + Timestamp.from(Instant.now()).toString(),
+            AnimalSpotted animalSpotted = new AnimalSpotted(
+                    animalType, finalStatus, false,
+                    "userId" + Timestamp.from(Instant.now()).toString(),
                     new Location(location), "userId", Timestamp.from(Instant.now()).toString());
             try {
                 animalSaveService.saveAnimal(animalSpotted, imageUri);
