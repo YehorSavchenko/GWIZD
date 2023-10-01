@@ -3,20 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="?android:attr/windowBackground"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#181435">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="611dp"
+        android:layout_height="257dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="logo"
+
+        android:src="@drawable/ic_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/photoView"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
         android:contentDescription="@string/photoDescription"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08"
+        app:layout_constraintVertical_bias="0.17"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -26,7 +38,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="64dp"
+        android:fontFamily="@font/firasans_black"
         android:text="@string/location"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/locationLabel"
         app:layout_constraintTop_toBottomOf="@+id/animalTypeLabel" />
@@ -47,7 +61,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/firasans_black"
         android:text="@string/phoneLabel"
+        android:textColor="#C4C4C4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationLabel" />
 
@@ -57,7 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
+        android:fontFamily="@font/firasans_black"
         android:text="@string/animalTypeLabel"
+        android:textColor="#C4C4C4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/photoView" />
 
@@ -67,7 +85,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/firasans_black"
         android:text="@string/locationLabel"
+        android:textColor="#C4C4C4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animalTypeLabel" />
 
@@ -77,7 +97,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/firasans_black"
         android:text="@string/phoneValue"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toEndOf="@+id/phoneViewLabel"
         app:layout_constraintTop_toBottomOf="@+id/locationLabel" />
 
@@ -87,7 +109,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
+
         android:orientation="horizontal"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneViewLabel">
 
@@ -96,7 +120,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/firasans_black"
             android:text="@string/domesticLabel"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,7 +131,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/firasans_black"
             android:text="@string/wildLabel"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,20 +142,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/firasans_black"
             android:text="@string/deadLabel"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </RadioGroup>
 
+
     <Button
         android:id="@+id/submitBtn"
-        android:layout_width="165dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="249dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle_border"
+        android:elevation="7dp"
         android:text="@string/submitText"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/isHurtSwitch" />
+        app:layout_constraintTop_toBottomOf="@id/isHurtSwitch" />
 
     <Switch
         android:id="@+id/isHurtSwitch"
@@ -135,7 +170,9 @@
         android:layout_height="41dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/firasans_black"
         android:text="@string/animalHurtLabel"
+        android:textColor="#C4C4C4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animalStatusRg"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -145,10 +182,14 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
+        android:background="@null"
+        android:fontFamily="@font/firasans_black"
         android:hint="@string/inputViewTip"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/animalTypeLabel"
         app:layout_constraintTop_toBottomOf="@+id/photoView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
