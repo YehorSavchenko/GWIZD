@@ -52,16 +52,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionViewLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/descriptionLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationView" />
-
-    <TextView
         android:id="@+id/phoneViewLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +59,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/phoneLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionViewLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/locationLabel" />
 
     <TextView
         android:id="@+id/animalTypeLabel"
@@ -92,16 +82,6 @@
         app:layout_constraintTop_toBottomOf="@+id/animalTypeLabel" />
 
     <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/descriptionValue"
-        app:layout_constraintStart_toEndOf="@+id/descriptionViewLabel"
-        app:layout_constraintTop_toBottomOf="@+id/locationView" />
-
-    <TextView
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +89,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/phoneValue"
         app:layout_constraintStart_toEndOf="@+id/phoneViewLabel"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/locationLabel" />
 
     <RadioGroup
         android:id="@+id/animalStatusRg"
@@ -151,12 +131,23 @@
 
     <Button
         android:id="@+id/submitBtn"
-        android:layout_width="153dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="165dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="20dp"
         android:text="@string/submitText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/animalStatusRg" />
+        app:layout_constraintTop_toBottomOf="@+id/isHurtSwitch" />
+
+    <Switch
+        android:id="@+id/isHurtSwitch"
+        android:layout_width="133dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/animalHurtLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animalStatusRg"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

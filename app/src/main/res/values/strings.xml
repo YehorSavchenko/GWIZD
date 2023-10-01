@@ -17,4 +17,5 @@
     <string name="wildLabel">Wild</string>
     <string name="deadLabel">Dead</string>
     <string name="submitText">Submit</string>
+    <string name="animalHurtLabel">Animal hurt</string>
 </resources>
