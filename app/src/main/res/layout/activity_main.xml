@@ -7,28 +7,6 @@
     android:background="#181435"
     tools:context=".activity.MainActivity">
 
-
-    <!-- Panel at the top -->
-    <FrameLayout
-        android:id="@+id/topPanel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <!-- Button in the right top corner of the panel -->
-        <Button
-            android:id="@+id/addNewButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add with existing picture"
-            android:layout_gravity="end|top"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#FFFFFF" />
-    </FrameLayout>
-
     <!-- Existing Button and Bottom Navigation -->
     <ImageButton
         android:id="@+id/openCameraBtn"
