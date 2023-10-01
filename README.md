@@ -17,10 +17,12 @@ Leveraging the power of cutting-edge technologies, GWIZD aims to deliver a seaml
 - Location-based services
 - User-friendly interface
 - Offline Caching and Data Persistence
+- Fully scalable cloud infrastructure
 
 ## Technology Stack
 - Android (Java)
 - Firebase Real-time Database
+- Google Cloud Storage
 
 ## Advantages
 GWIZD offers several advantages that make it stand out in the domain:
