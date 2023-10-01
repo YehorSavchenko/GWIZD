@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.centarius.gwizd.R;
 import com.centarius.gwizd.fragments.CameraFragment;
 import com.centarius.gwizd.fragments.ListFragment;
+import com.centarius.gwizd.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
@@ -153,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
                 // Initialize your profile fragment here
                 // selectedFragment = new ProfileFragment();
                 // tag = "ProfileFragment";
+                selectedFragment = new ProfileFragment();
+                tag = "ProfileFragment";
             }
 
             if (selectedFragment != null) {
