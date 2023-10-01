@@ -109,12 +109,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openCameraFragment() {
-        disableCameraButton();  // Disable camera button
+        disableCameraButton();
+        // Create an instance of your CameraFragment
+        CameraFragment cameraFragment = CameraFragment.newInstance(imageUri);
 
-        CameraFragment cameraFragment = CameraFragment.newInstance(imageUri);  // Create an instance of your CameraFragment
+        // Replace any existing fragment with the new one
+        // Add this transaction to the back stack
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, cameraFragment, "CameraFragment") // Replace any existing fragment with the new one
-                .addToBackStack(null) // Add this transaction to the back stack
+                .replace(R.id.fragment_container, cameraFragment, "CameraFragment")
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -154,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (selectedFragment != null) {
                 Fragment existingFragment = getSupportFragmentManager().findFragmentByTag(tag);
-                if (existingFragment == null) { // Check if the fragment is already in the back stack
+                // Check if the fragment is already in the back stack
+                if (existingFragment == null) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, selectedFragment, tag)
                             .addToBackStack(tag)
