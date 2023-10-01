@@ -33,5 +33,8 @@ Thanks to Firebase's real-time capabilities, users can interact with the applica
 ### User-Friendly Interface
 An intuitive UI/UX ensures that the user can easily navigate through the application, making it accessible for people of all tech-savviness levels.
 
+### Elastic back-end infrastructure
+GWIZD leverages the power of Google Cloud Platform to achieve high levels of flexibility, so it doesn't need to fear high user traffic.
+
 ## Getting Started
-To get started with GWIZD, clone the repository and run emulation for Anroid or run it on own phone.
+To get started with GWIZD, clone the repository and run emulation for Android or run it on own phone.
