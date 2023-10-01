@@ -3,27 +3,27 @@ package com.centarius.gwizd.model;
 import androidx.annotation.NonNull;
 
 public class Location {
-    public Location(String whatever) {
-        this.whatever = whatever;
+    public Location(String locationString) {
+        this.locationString = locationString;
     }
 
-    private String whatever;
+    private String locationString;
 
     public Location() {
     }
 
-    public String getWhatever() {
-        return whatever;
+    public String getLocationString() {
+        return locationString;
     }
 
-    public void setWhatever(String whatever) {
-        this.whatever = whatever;
+    public void setLocationString(String locationString) {
+        this.locationString = locationString;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return whatever;
+        return locationString;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class Location {
 
         Location location = (Location) o;
 
-        return whatever.equals(location.whatever);
+        return locationString.equals(location.locationString);
     }
 
     @Override
     public int hashCode() {
-        return whatever.hashCode();
+        return locationString.hashCode();
     }
 }
