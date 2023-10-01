@@ -7,8 +7,6 @@
 4. [Technology Stack](#technology-stack)
 5. [Advantages](#advantages)
 6. [Getting Started](#getting-started)
-7. [Contributing](#contributing)
-8. [License](#license)
 
 ## Introduction
 Welcome to the GWIZD mobile application repository. GWIZD is an innovative platform designed to provide real-time analytics
