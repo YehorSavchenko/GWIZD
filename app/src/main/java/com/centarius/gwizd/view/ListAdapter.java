@@ -36,7 +36,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         AnimalSpotted animalSpotted = dataList.get(position);
 
-        holder.tvAnimalTypeAndStatus.setText(animalSpotted.getAnimalType() + " (" + animalSpotted.getAnimalStatus().toString() + ")");
+        holder.tvAnimalTypeAndStatus.setText(animalSpotted.getAnimalType() + " (" + getAnimalStatus(animalSpotted.getAnimalStatus()) + ")");
         holder.tvLocation.setText("Location: " + animalSpotted.getLocation());  // Assuming Location has a suitable toString method
         holder.tvTimestamp.setText("Timestamp: " + animalSpotted.getTimestamp());
 
@@ -47,6 +47,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    private String getAnimalStatus(AnimalSpotted.AnimalStatus animalStatus) {
+        switch (animalStatus) {
+            case NO_STATUS:
+                return "No status";
+            case ANIMAL_DEAD:
+                return "Dead animal";
+            case ANIMAL_WILD:
+                return "Wild animal";
+            case ANIMAL_OWNED:
+                return "Domestic animal";
+            default:
+                return "Missing status";
+        }
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
