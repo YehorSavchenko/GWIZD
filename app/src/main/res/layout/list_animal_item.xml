@@ -9,12 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@drawable/rectangle_2">
 
         <TextView
             android:id="@+id/tvAnimalTypeAndStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lalezar_regular"
             android:text="Animal Type and Status"
             android:textSize="18sp"/>
 
@@ -22,6 +24,7 @@
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lalezar_regular"
             android:layout_below="@id/tvAnimalTypeAndStatus"
             android:text="Location"
             android:textSize="16sp"/>
@@ -30,6 +33,7 @@
             android:id="@+id/tvTimestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lalezar_regular"
             android:layout_below="@id/tvLocation"
             android:text="Timestamp"
             android:textSize="14sp"/>
@@ -40,7 +44,7 @@
             android:layout_height="24dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right" />  <!-- Assuming you have this arrow icon -->
+            android:src="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
