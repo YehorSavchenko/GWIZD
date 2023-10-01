@@ -4,4 +4,8 @@
         <item name="android:textSize">37sp</item>
         <item name="android:textColor">#A5A8AB</item>
     </style>
+    <style name="reports_14_">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>

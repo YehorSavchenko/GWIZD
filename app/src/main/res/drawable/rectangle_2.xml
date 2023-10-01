@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="328dp"
+    android:height="104dp"
+    android:viewportWidth="328"
+    android:viewportHeight="104"
+    tools:ignore="VectorRaster">
+    <group>
+        <clip-path
+            android:pathData="M14 0H314C321.732 0 328 6.26801 328 14V90C328 97.732 321.732 104 314 104H14C6.26801 104 0 97.732 0 90V14C0 6.26801 6.26801 0 14 0Z" />
+        <group
+            android:translateX="1"
+            android:translateY="0"
+            android:pivotX="164"
+            android:pivotY="52"
+            android:scaleX="2"
+            android:scaleY="5"
+            android:rotation="90">
+            <path
+                android:pathData="M0 0V104H328V0">
+                <aapt:attr name="android:fillColor">
+                    <gradient
+                        android:type="linear"
+                        android:startX="82"
+                        android:startY="52"
+                        android:endX="246"
+                        android:endY="52">
+                        <item
+                            android:color="#6F6BAF"
+                            android:offset="0.057" />
+                        <item
+                            android:color="#73362A4A"
+                            android:offset="1" />
+                    </gradient>
+                </aapt:attr>
+            </path>
+        </group>
+        <path
+            android:pathData="M14 0H314C321.732 0 328 6.26801 328 14V90C328 97.732 321.732 104 314 104H14C6.26801 104 0 97.732 0 90V14C0 6.26801 6.26801 0 14 0Z"
+            android:strokeWidth="4"
+            android:strokeColor="#050506" />
+    </group>
+</vector>
