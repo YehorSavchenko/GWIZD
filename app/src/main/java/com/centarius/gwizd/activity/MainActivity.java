@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.topPanel).setEnabled(false);
+        findViewById(R.id.topPanel).setVisibility(View.GONE);
+        findViewById(R.id.addNewButton).setEnabled(false);
+        findViewById(R.id.addNewButton).setVisibility(View.GONE);
         fragmentStack.push(R.id.action_camera);  // Add the default fragment ID to the stack
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -145,9 +149,17 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.action_list) {
                 selectedFragment = new ListFragment();
                 tag = "ListFragment";
+                findViewById(R.id.addNewButton).setEnabled(true);
+                findViewById(R.id.topPanel).setEnabled(true);
+                findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
+                findViewById(R.id.addNewButton).setVisibility(View.VISIBLE);
             } else if (id == R.id.action_camera) {
                 // Pop the entire fragment stack to return to initial state
                 getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+                findViewById(R.id.addNewButton).setEnabled(false);
+                findViewById(R.id.topPanel).setEnabled(false);
+                findViewById(R.id.topPanel).setVisibility(View.GONE);
+                findViewById(R.id.addNewButton).setVisibility(View.GONE);
                 return true;
             } else if (id == R.id.action_profile) {
                 // Initialize your profile fragment here
