@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,7 +28,7 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button openCameraButton;
+    ImageButton openCameraButton;
     BottomNavigationView bottomNavigationView;
     Stack<Integer> fragmentStack = new Stack<>();
 
