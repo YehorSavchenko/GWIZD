@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.top_color));
         fragmentStack.push(R.id.action_camera);  // Add the default fragment ID to the stack
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
