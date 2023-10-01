@@ -115,8 +115,7 @@ public class CameraFragment extends Fragment {
         photoView.setImageURI(imageUri);
 
         // Get the location and recognize the animal
-        getLocation();
-        String location = "Zabiniec 125, 31-215, Cracow";
+        Location location = getLocation(new Location(""));
         String animalType = recognizeAnimal(imageUri);
 
         // Get animal status
@@ -140,7 +139,7 @@ public class CameraFragment extends Fragment {
             AnimalSpotted animalSpotted = new AnimalSpotted(
                     animalType, finalStatus, false,
                     "userId" + Timestamp.from(Instant.now()).toString(),
-                    new Location(location), "userId", Timestamp.from(Instant.now()).toString());
+                    location, "userId", Timestamp.from(Instant.now()).toString());
             try {
                 animalSaveService.saveAnimal(animalSpotted, imageUri);
                 requireActivity().getSupportFragmentManager().popBackStack();
@@ -152,7 +151,7 @@ public class CameraFragment extends Fragment {
 
 
     @SuppressLint("SetTextI18n")
-    private void getLocation() {
+    private Location getLocation(Location input) {
         locationView = requireView().findViewById(R.id.locationView);
         fusedLocationProviderClient = new FusedLocationProviderClient(context);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -165,6 +164,7 @@ public class CameraFragment extends Fragment {
                                 location.getLatitude(), location.getLongitude(), 1);
                         if (addresses != null && addresses.size() > 0) {
                             locationView.setText(addresses.get(0).getAddressLine(0));
+                            input.setLocationString(addresses.get(0).getAddressLine(0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -175,6 +175,7 @@ public class CameraFragment extends Fragment {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         }
+        return input;
     }
 
     @SuppressLint("DefaultLocale")
