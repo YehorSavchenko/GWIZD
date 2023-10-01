@@ -28,9 +28,6 @@ GWIZD offers several advantages that make it stand out in the domain:
 ### Real-Time Interaction
 Thanks to Firebase's real-time capabilities, users can interact with the application in real time, ensuring immediate update and feedback.
 
-### High Scalability
-The architecture is designed for scalability, making it easy to integrate new features and technologies as they emerge.
-
 ### User-Friendly Interface
 An intuitive UI/UX ensures that the user can easily navigate through the application, making it accessible for people of all tech-savviness levels.
 
