@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.centarius.gwizd.R;
-import com.centarius.gwizd.activity.MainActivity;
 import com.centarius.gwizd.model.AnimalSpotted;
 import com.centarius.gwizd.utils.AnimalSaveService;
 import com.centarius.gwizd.view.ListAdapter;
