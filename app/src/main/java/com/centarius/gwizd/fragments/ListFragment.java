@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -80,10 +81,17 @@ public class ListFragment extends Fragment {
             if (!animalSpottedList.contains(it)) {
                 animalSpottedList.add(it);
                 adapter.notifyDataSetChanged();
+                ((TextView)view.findViewById(R.id.recordCountTextView)).setText(
+                        ("Records: " + animalSpottedList.size())
+                );
             }},
                 it -> {
             animalSpottedList.remove(it);
-            adapter.notifyDataSetChanged();});
+            adapter.notifyDataSetChanged();
+                    ((TextView)view.findViewById(R.id.recordCountTextView)).setText(
+                            ("Records: " + animalSpottedList.size())
+                    );
+        });
         addButton.setOnClickListener(it -> executeForAddButton(pickMedia));
 
         // Set the adapter
