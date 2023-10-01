@@ -85,6 +85,14 @@ public class CameraFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).enableCameraButton();
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         // Show the bottom navigation
