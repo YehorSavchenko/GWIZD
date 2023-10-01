@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,6 @@ public class CameraFragment extends Fragment {
     private static final int IMAGE_SIZE = 224;
     private Uri imageUri;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private TextView locationView;
     private Context context;
 
     public static CameraFragment newInstance(Uri imageUri) {
@@ -105,6 +105,7 @@ public class CameraFragment extends Fragment {
         ((MainActivity) requireActivity()).showBottomNavigation();
     }
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -118,13 +119,12 @@ public class CameraFragment extends Fragment {
         Location location = getLocation(new Location(""));
         String animalType = recognizeAnimal(imageUri);
 
-        // Get animal status
-        RadioGroup animalStatus = requireView().findViewById(R.id.animalStatusRg);
-
-        // save animal to gcp
+        // Submit data
         Button submitBtn = requireView().findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(view1 -> {
 
+            // Get animal status
+            RadioGroup animalStatus = requireView().findViewById(R.id.animalStatusRg);
             AnimalSpotted.AnimalStatus status = AnimalSpotted.AnimalStatus.NO_STATUS;
             int id = animalStatus.getCheckedRadioButtonId();
             if (id == R.id.domesticRb) {
@@ -136,10 +136,23 @@ public class CameraFragment extends Fragment {
             }
             AnimalSpotted.AnimalStatus finalStatus = status;
 
+            // Get information is animal hurt
+            Switch isHurtSwitch = requireView().findViewById(R.id.isHurtSwitch);
+            boolean isHurt = isHurtSwitch.isChecked();
+
+            // Set mocked userId and timestamp
+            String userId = "userId";
+            String timestamp = Timestamp.from(Instant.now()).toString();
+
+            // Save animal to gcp
             AnimalSpotted animalSpotted = new AnimalSpotted(
-                    animalType, finalStatus, false,
-                    "userId" + Timestamp.from(Instant.now()).toString(),
-                    location, "userId", Timestamp.from(Instant.now()).toString());
+                    animalType,
+                    finalStatus,
+                    isHurt,
+                    userId + timestamp,
+                    location,
+                    userId,
+                    timestamp);
             try {
                 animalSaveService.saveAnimal(animalSpotted, imageUri);
                 requireActivity().getSupportFragmentManager().popBackStack();
@@ -152,7 +165,7 @@ public class CameraFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private Location getLocation(Location input) {
-        locationView = requireView().findViewById(R.id.locationView);
+        TextView locationView = requireView().findViewById(R.id.locationView);
         fusedLocationProviderClient = new FusedLocationProviderClient(context);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
