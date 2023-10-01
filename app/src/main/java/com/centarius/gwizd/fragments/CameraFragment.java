@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.centarius.gwizd.R;
 import com.centarius.gwizd.activity.MainActivity;
@@ -155,7 +156,15 @@ public class CameraFragment extends Fragment {
                     timestamp);
             try {
                 animalSaveService.saveAnimal(animalSpotted, imageUri);
-                requireActivity().getSupportFragmentManager().popBackStack();
+
+                // Switch to SubmitFragment
+                SubmitFragment submitFragment = new SubmitFragment(); // Create a new instance of SubmitFragment
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, submitFragment) // Replace the current fragment
+                        .commitNow(); // Commit the transaction
+
+                // Clear the back stack
+                requireActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             } catch (UploadException e) {
                 throw new RuntimeException(e);
             }
