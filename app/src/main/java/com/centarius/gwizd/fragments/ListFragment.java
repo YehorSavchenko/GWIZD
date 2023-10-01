@@ -2,10 +2,14 @@ package com.centarius.gwizd.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -47,6 +51,24 @@ public class ListFragment extends Fragment {
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        View addButton = view.findViewById(R.id.addButton);
+
+        ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                    // Callback is invoked after the user selects a media item or closes the
+                    // photo picker.
+                    if (uri != null) {
+                        Log.d("PhotoPicker", "Selected URI: " + uri);
+                        CameraFragment cameraFragment = CameraFragment.newInstance(uri);  // Create an instance of your CameraFragment
+                        this.getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, cameraFragment, "CameraFragment") // Replace any existing fragment with the new one
+                                .addToBackStack(null) // Add this transaction to the back stack
+                                .commit();
+                    } else {
+                        Log.d("PhotoPicker", "No media selected");
+                    }
+                });
+
 
         // Create a list to hold AnimalSpotted objects
         List<AnimalSpotted> animalSpottedList = new ArrayList<>();
@@ -61,10 +83,17 @@ public class ListFragment extends Fragment {
                 it -> {
             animalSpottedList.remove(it);
             adapter.notifyDataSetChanged();});
+        addButton.setOnClickListener(it -> executeForAddButton(pickMedia));
 
         // Set the adapter
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    private void executeForAddButton(ActivityResultLauncher<PickVisualMediaRequest> pickMedia) {
+        pickMedia.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                .build());
     }
 }
