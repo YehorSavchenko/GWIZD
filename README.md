@@ -3,9 +3,9 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
-4. [Technology Stack](#technology-stack)
-5. [Advantages](#advantages)
-6. [Getting Started](#getting-started)
+3. [Technology Stack](#technology-stack)
+4. [Advantages](#advantages)
+5. [Getting Started](#getting-started)
 
 ## Introduction
 Welcome to the GWIZD mobile application repository. GWIZD is an innovative platform designed to provide real-time analytics
@@ -23,6 +23,7 @@ Leveraging the power of cutting-edge technologies, GWIZD aims to deliver a seaml
 - Android (Java)
 - Firebase Real-time Database
 - Google Cloud Storage
+- TensorFlow Lite (Machine Learning model)
 
 ## Advantages
 GWIZD offers several advantages that make it stand out in the domain:
