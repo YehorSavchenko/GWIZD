@@ -166,7 +166,7 @@ public class CameraFragment extends Fragment {
 
             // Save animal to gcp
             AnimalSpotted animalSpotted = new AnimalSpotted(
-                    animalType,
+                    animalTypeView.getText().toString(),
                     finalStatus,
                     isHurt,
                     userId + timestamp,
