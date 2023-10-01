@@ -5,10 +5,6 @@ import android.net.Uri;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.sql.Timestamp;
-import java.time.Instant;
-
 public class AnimalImageStorageClient {
     private final StorageReference storage;
     private final String imagesPath = "images/";
