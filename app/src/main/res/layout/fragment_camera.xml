@@ -29,17 +29,7 @@
         android:text="@string/location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/locationLabel"
-        app:layout_constraintTop_toBottomOf="@+id/animalTypeView" />
-
-    <TextView
-        android:id="@+id/animalTypeView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
-        android:text="@string/animalType"
-        app:layout_constraintStart_toEndOf="@+id/animalTypeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/photoView" />
+        app:layout_constraintTop_toBottomOf="@+id/animalTypeLabel" />
 
     <ImageButton
         android:id="@+id/closeButton"
@@ -149,5 +139,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animalStatusRg"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/animalTypeView"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:hint="@string/inputViewTip"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/animalTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/photoView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

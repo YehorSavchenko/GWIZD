@@ -9,9 +9,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,6 +47,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CameraFragment extends Fragment {
 
@@ -54,6 +57,7 @@ public class CameraFragment extends Fragment {
     private Uri imageUri;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private Context context;
+    String animalType;
 
     public static CameraFragment newInstance(Uri imageUri) {
         CameraFragment fragment = new CameraFragment();
@@ -118,7 +122,22 @@ public class CameraFragment extends Fragment {
 
         // Get the location and recognize the animal
         Location location = getLocation(new Location(""));
-        String animalType = recognizeAnimal(imageUri);
+        animalType = recognizeAnimal(imageUri);
+
+        // Set animalType if user want to change it
+        TextView animalTypeView = requireView().findViewById(R.id.animalTypeView);
+        animalTypeView.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                    && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                // Save the value entered in the EditText
+                String newText = Objects.requireNonNull(animalTypeView.getText()).toString();
+                animalTypeView.setText(newText);
+                // Update animal type value
+                animalType = String.valueOf(animalTypeView.getText());
+                return true;
+            }
+            return false;
+        });
 
         // Submit data
         Button submitBtn = requireView().findViewById(R.id.submitBtn);
@@ -247,8 +266,8 @@ public class CameraFragment extends Fragment {
             }
             String[] classes = {"Cat", "Dog", "Fox", "Boar"};
 
-            TextView animalType = requireView().findViewById(R.id.animalTypeView);
-            animalType.setText(classes[maxPos]);
+            TextView animalTypeView = requireView().findViewById(R.id.animalTypeView);
+            animalTypeView.setText(classes[maxPos]);
 
             model.close();
             return classes[maxPos];
