@@ -3,7 +3,6 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
-3. [Architecture](#architecture)
 4. [Technology Stack](#technology-stack)
 5. [Advantages](#advantages)
 6. [Getting Started](#getting-started)
@@ -18,11 +17,6 @@ Leveraging the power of cutting-edge technologies, GWIZD aims to deliver a seaml
 - Location-based services
 - User-friendly interface
 - Offline Caching and Data Persistence
-
-## Architecture
-The application adopts a modular and scalable architecture, ensuring clean code practices and efficient performance. 
-With a multi-tier architecture in place, GWIZD effectively separates concerns into distinct layers, 
-making it easy to manage and extend functionalities.
 
 ## Technology Stack
 - Android (Java)
