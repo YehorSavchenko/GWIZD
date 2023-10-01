@@ -104,11 +104,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void disableCameraButton() {
+        openCameraButton.setEnabled(false);
+    }
 
-
+    public void enableCameraButton() {
+        openCameraButton.setEnabled(true);
+    }
 
     private void openCameraFragment() {
-        // Open CameraFragment
+        disableCameraButton();  // Disable camera button
+
         CameraFragment cameraFragment = CameraFragment.newInstance(imageUri);  // Create an instance of your CameraFragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, cameraFragment, "CameraFragment") // Replace any existing fragment with the new one
