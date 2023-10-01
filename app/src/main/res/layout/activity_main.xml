@@ -53,7 +53,7 @@
             android:id="@+id/logoImageView"
             android:layout_width="611dp"
             android:layout_height="257dp"
-            android:contentDescription="logo"
+            android:contentDescription="@string/logoLabel"
 
             android:src="@drawable/ic_logo" />
 

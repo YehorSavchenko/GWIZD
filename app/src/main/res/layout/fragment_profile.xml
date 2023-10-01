@@ -14,7 +14,7 @@
         android:layout_height="257dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:contentDescription="logo"
+        android:contentDescription="@string/logoLabel"
         android:src="@drawable/ic_logo" />
 
     <!-- ConstraintLayout for Avatar, Name, and Phone -->
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_avatar"
                 android:scaleType="fitXY"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/todoLabel" />
         </FrameLayout>
 
         <!-- Name -->
@@ -50,7 +50,7 @@
             android:id="@+id/nameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="John Doe"
+            android:text="@string/userName"
             android:layout_marginStart="15dp"
             android:textColor="#C4C4C4"
             android:textSize="20sp"
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_marginStart="15dp"
             android:layout_height="wrap_content"
-            android:text="+48123456789"
+            android:text="@string/userPhoneNumber"
             android:textColor="#C4C4C4"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/avatarFrame"
@@ -92,7 +92,7 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_dark_mode"
         android:layout_gravity="center_vertical"
-        android:contentDescription="Dark Mode Icon" />
+        android:contentDescription="@string/darkModeIcon" />
 
         <!-- Spacing -->
         <View
@@ -105,7 +105,7 @@
             android:id="@+id/darkModeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dark Mode"
+            android:text="@string/darkModeLabel"
             android:fontFamily="@font/firasans_black"
             android:layout_gravity="center" />
 
@@ -114,10 +114,8 @@
             android:id="@+id/darkModeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end" />
-
+            android:layout_gravity="center_vertical|end"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
-
-
 </FrameLayout>

@@ -16,7 +16,21 @@
     <string name="domesticLabel">Domestic</string>
     <string name="wildLabel">Wild</string>
     <string name="deadLabel">Dead</string>
-    <string name="submitText">Submit</string>
     <string name="animalHurtLabel">Animal hurt</string>
+    <string name="submitText">Submit</string>
     <string name="inputViewTip"> </string>
+
+    <string name="logoLabel">logo</string>
+    <string name="addButtonLabel">Add</string>
+    <string name="darkModeIcon">Dark Mode Icon</string>
+    <string name="darkModeLabel">Dark Mode</string>
+    <string name="timestampLabel">Timestamp</string>
+    <string name="animalTypeStatusLabel">Animal Type and Status</string>
+    <string name="itemLocationLabel">Location</string>
+
+    <!--  user profile mock information  -->
+    <string name="userName">John Doe</string>
+    <string name="userPhoneNumber">+48123456789</string>
+    <string name="todoLabel">TODO</string>
+    <string name="reportsNumber">Reports: 0</string>
 </resources>

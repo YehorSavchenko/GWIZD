@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lalezar_regular"
-            android:text="Animal Type and Status"
+            android:text="@string/animalTypeStatusLabel"
             android:textSize="18sp"/>
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lalezar_regular"
             android:layout_below="@id/tvAnimalTypeAndStatus"
-            android:text="Location"
+            android:text="@string/itemLocationLabel"
             android:textSize="16sp"/>
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lalezar_regular"
             android:layout_below="@id/tvLocation"
-            android:text="Timestamp"
+            android:text="@string/timestampLabel"
             android:textSize="14sp"/>
 
         <ImageView
