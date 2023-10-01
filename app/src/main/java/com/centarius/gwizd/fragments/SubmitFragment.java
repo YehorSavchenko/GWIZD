@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.centarius.gwizd.activity.MainActivity;
 import com.centarius.gwizd.R;
+import com.centarius.gwizd.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,14 +19,8 @@ import com.centarius.gwizd.R;
  */
 public class SubmitFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public SubmitFragment() {
         // Required empty public constructor
@@ -40,7 +34,6 @@ public class SubmitFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment SubmitFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SubmitFragment newInstance(String param1, String param2) {
         SubmitFragment fragment = new SubmitFragment();
         Bundle args = new Bundle();
@@ -53,10 +46,6 @@ public class SubmitFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -79,6 +68,7 @@ public class SubmitFragment extends Fragment {
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();

@@ -18,7 +18,7 @@
         android:contentDescription="@string/cameraBtnLabel"
         android:focusable="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_photo_button"
+        android:src="@drawable/ic_cammera_button_new"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
