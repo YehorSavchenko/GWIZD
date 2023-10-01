@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,10 @@ import androidx.fragment.app.Fragment;
 import com.centarius.gwizd.R;
 import com.centarius.gwizd.activity.MainActivity;
 import com.centarius.gwizd.ml.Model;
+import com.centarius.gwizd.model.AnimalSpotted;
+import com.centarius.gwizd.model.Location;
+import com.centarius.gwizd.model.UploadException;
+import com.centarius.gwizd.utils.AnimalSaveService;
 import com.centarius.gwizd.utils.ImageUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 
@@ -33,8 +38,11 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CameraFragment extends Fragment {
 
@@ -45,6 +53,7 @@ public class CameraFragment extends Fragment {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView locationView;
     private Context context;
+    private final AnimalSaveService animalSaveService = AnimalSaveService.getInstance();
 
     public static CameraFragment newInstance(Uri imageUri) {
         CameraFragment fragment = new CameraFragment();
@@ -110,13 +119,29 @@ public class CameraFragment extends Fragment {
         photoView.setImageURI(imageUri);
 
         // Get the location and recognize the animal
-        getLocation();
-        recognizeAnimal(imageUri);
+        String location = getLocation();
+        String animalType = recognizeAnimal(imageUri);
+
+        Button submitBtn = getView().findViewById(R.id.submitBtn);
+
+        submitBtn.setOnClickListener(view1 -> {
+            AnimalSpotted animalSpotted = new AnimalSpotted(animalType,
+                    AnimalSpotted.AnimalStatus.ANIMAL_WILD,
+                    false, "userId" + Timestamp.from(Instant.now()).toString(),
+                    new Location(location), "userId", Timestamp.from(Instant.now()).toString());
+            try {
+                animalSaveService.saveAnimal(animalSpotted, imageUri);
+                requireActivity().getSupportFragmentManager().popBackStack();
+            } catch (UploadException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 
     @SuppressLint("SetTextI18n")
-    private void getLocation() {
+    private String getLocation() {
+        AtomicReference<String> locationToReturn = new AtomicReference<>("");
         locationView = getView().findViewById(R.id.locationView);
         fusedLocationProviderClient = new FusedLocationProviderClient(context);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -129,6 +154,7 @@ public class CameraFragment extends Fragment {
                                 location.getLatitude(), location.getLongitude(), 1);
                         if (addresses != null && addresses.size() > 0) {
                             locationView.setText(addresses.get(0).getAddressLine(0));
+                            locationToReturn.set(addresses.get(0).getAddressLine(0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -139,10 +165,11 @@ public class CameraFragment extends Fragment {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         }
+        return locationToReturn.get();
     }
 
     @SuppressLint("DefaultLocale")
-    private void recognizeAnimal(Uri imageUri) {
+    private String recognizeAnimal(Uri imageUri) {
         try {
 //            context = getApplicationContext();
             Model model = Model.newInstance(context);
@@ -197,8 +224,10 @@ public class CameraFragment extends Fragment {
 
             // Releases model resources if no longer used.
             model.close();
+            return classes[maxPos];
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "";
     }
 }

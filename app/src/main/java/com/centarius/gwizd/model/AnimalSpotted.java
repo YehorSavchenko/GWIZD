@@ -3,10 +3,11 @@ package com.centarius.gwizd.model;
 import androidx.annotation.NonNull;
 
 public class AnimalSpotted {
-    private String animalType;
 
     public AnimalSpotted() {
     }
+
+    private String animalType;
 
     private AnimalStatus animalStatus;
     private boolean isHurt;
