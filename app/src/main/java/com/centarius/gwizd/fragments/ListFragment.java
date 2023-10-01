@@ -95,7 +95,6 @@ public class ListFragment extends Fragment {
 
         // Set the adapter
         recyclerView.setAdapter(adapter);
-
         return view;
     }
 

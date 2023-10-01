@@ -65,7 +65,6 @@ public class SubmitFragment extends Fragment {
                 getActivity().finish();
             }
         }, 2000); // 2 seconds (2000 milliseconds)
-
         return view;
     }
 
@@ -84,5 +83,4 @@ public class SubmitFragment extends Fragment {
             ((MainActivity) getActivity()).showBottomNavigation();
         }
     }
-
 }

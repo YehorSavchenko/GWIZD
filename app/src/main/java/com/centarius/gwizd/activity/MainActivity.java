@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     ImageButton openCameraButton;
     BottomNavigationView bottomNavigationView;
     Stack<Integer> fragmentStack = new Stack<>();
-
     private Uri imageUri;
 
     private final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
@@ -57,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,11 +66,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         openCameraButton = findViewById(R.id.openCameraBtn);
-
-        openCameraButton.setOnClickListener(view -> {
-            callCamera();
-        });
-
+        openCameraButton.setOnClickListener(view -> callCamera());
         setBottomNavigationView();
     }
 

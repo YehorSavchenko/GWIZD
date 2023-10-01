@@ -57,7 +57,6 @@ public class AnimalDao {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot,
                                        @Nullable String previousChildName) {
-
             }
 
             @Override
