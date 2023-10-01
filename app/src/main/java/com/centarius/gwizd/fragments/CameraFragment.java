@@ -43,18 +43,16 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class CameraFragment extends Fragment {
 
-    private static final int CAMERA_PERMISSION_REQUEST_CODE = 777;
+    private final AnimalSaveService animalSaveService = AnimalSaveService.getInstance();
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 888;
     private static final int IMAGE_SIZE = 224;
     private Uri imageUri;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private TextView locationView;
     private Context context;
-    private final AnimalSaveService animalSaveService = AnimalSaveService.getInstance();
 
     public static CameraFragment newInstance(Uri imageUri) {
         CameraFragment fragment = new CameraFragment();
@@ -76,14 +74,12 @@ public class CameraFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
-
         // Find the close button and attach a click listener
         ImageButton closeButton = view.findViewById(R.id.closeButton);
         closeButton.setOnClickListener(v -> {
             // Close this fragment
             requireActivity().getSupportFragmentManager().popBackStack();
         });
-
         return view;
     }
 
@@ -115,29 +111,32 @@ public class CameraFragment extends Fragment {
         context = getContext();
 
         // Set the image URI to ImageView to show the picture
-        ImageView photoView = getView().findViewById(R.id.photoView);
-//        Log.i("MYPHOTO", imageUri.toString());
+        ImageView photoView = requireView().findViewById(R.id.photoView);
         photoView.setImageURI(imageUri);
 
         // Get the location and recognize the animal
-        String location = getLocation();
+        getLocation();
+        String location = "Zabiniec 125, 31-215, Cracow";
         String animalType = recognizeAnimal(imageUri);
 
-        Button submitBtn = getView().findViewById(R.id.submitBtn);
-        RadioGroup animalStatus = getView().findViewById(R.id.animalStatusRg);
-        AnimalSpotted.AnimalStatus status = AnimalSpotted.AnimalStatus.NO_STATUS;
+        // Get animal status
+        RadioGroup animalStatus = requireView().findViewById(R.id.animalStatusRg);
 
-        int id = animalStatus.getCheckedRadioButtonId();
-        if (id == R.id.domesticRb) {
-            status = AnimalSpotted.AnimalStatus.ANIMAL_OWNED;
-        } else if (id == R.id.wildRb) {
-            status = AnimalSpotted.AnimalStatus.ANIMAL_WILD;
-        } else if (id == R.id.deadRb) {
-            status = AnimalSpotted.AnimalStatus.ANIMAL_DEAD;
-        }
-        AnimalSpotted.AnimalStatus finalStatus = status;
-
+        // save animal to gcp
+        Button submitBtn = requireView().findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(view1 -> {
+
+            AnimalSpotted.AnimalStatus status = AnimalSpotted.AnimalStatus.NO_STATUS;
+            int id = animalStatus.getCheckedRadioButtonId();
+            if (id == R.id.domesticRb) {
+                status = AnimalSpotted.AnimalStatus.ANIMAL_OWNED;
+            } else if (id == R.id.wildRb) {
+                status = AnimalSpotted.AnimalStatus.ANIMAL_WILD;
+            } else if (id == R.id.deadRb) {
+                status = AnimalSpotted.AnimalStatus.ANIMAL_DEAD;
+            }
+            AnimalSpotted.AnimalStatus finalStatus = status;
+
             AnimalSpotted animalSpotted = new AnimalSpotted(
                     animalType, finalStatus, false,
                     "userId" + Timestamp.from(Instant.now()).toString(),
@@ -153,9 +152,8 @@ public class CameraFragment extends Fragment {
 
 
     @SuppressLint("SetTextI18n")
-    private String getLocation() {
-        AtomicReference<String> locationToReturn = new AtomicReference<>("");
-        locationView = getView().findViewById(R.id.locationView);
+    private void getLocation() {
+        locationView = requireView().findViewById(R.id.locationView);
         fusedLocationProviderClient = new FusedLocationProviderClient(context);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -167,7 +165,6 @@ public class CameraFragment extends Fragment {
                                 location.getLatitude(), location.getLongitude(), 1);
                         if (addresses != null && addresses.size() > 0) {
                             locationView.setText(addresses.get(0).getAddressLine(0));
-                            locationToReturn.set(addresses.get(0).getAddressLine(0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -178,7 +175,6 @@ public class CameraFragment extends Fragment {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         }
-        return locationToReturn.get();
     }
 
     @SuppressLint("DefaultLocale")
@@ -189,19 +185,15 @@ public class CameraFragment extends Fragment {
 
             // Load and preprocess the image
             Bitmap bitmap = ImageUtils.loadAndPreprocessImage(context, imageUri, IMAGE_SIZE);
-
             // Creates inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
-
             // Run inference on the image
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * IMAGE_SIZE * IMAGE_SIZE * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
             byteBuffer.rewind();
 
-
             // Fill the input buffer with image data
             int[] intValues = new int[IMAGE_SIZE * IMAGE_SIZE];
-
             if (bitmap != null) {
                 bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
             }
@@ -232,10 +224,9 @@ public class CameraFragment extends Fragment {
             }
             String[] classes = {"Cat", "Dog", "Fox", "Boar"};
 
-            TextView animalType = getView().findViewById(R.id.animalTypeView);
+            TextView animalType = requireView().findViewById(R.id.animalTypeView);
             animalType.setText(classes[maxPos]);
 
-            // Releases model resources if no longer used.
             model.close();
             return classes[maxPos];
         } catch (IOException e) {
